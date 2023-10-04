@@ -1,6 +1,6 @@
 import React from 'react';
 import Table from './Table';
-import './checkout_style.css'
+import './checkout.css'
 
 
 const Checkout = ({ amount, setGlobal, response }) => {
@@ -10,16 +10,23 @@ const Checkout = ({ amount, setGlobal, response }) => {
   }
   
   return (
-    <div className="container">
-    <div className="box">
-      <div className="home-button" onClick={back}>
-        Go Back
-      </div>
+    <div style={{marginTop:"20px"}}>  
 
-      <div className="title">
-        <h3>Details for Adults and Children</h3>
-        <Table response={response} />
+     <div className="home-button" onClick={back}>
+         Click Here To Go Back
       </div>
+    <br>
+    </br>
+    <div className="title">
+        <h3>Purchase Summary</h3>
+    </div>
+    <Table response={response} />
+
+    <div >
+    <div className="marval">
+     
+
+      
 
       <div className="checkout">
         <h2>Checkout</h2>
@@ -46,6 +53,7 @@ const Checkout = ({ amount, setGlobal, response }) => {
         <div className="pay-button">Pay Now</div>
       </div>
     </div>
+  </div>
   </div>
   
 

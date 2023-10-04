@@ -2,7 +2,7 @@ import React, { useState} from 'react'
 
 import insurance from "./Image/insurance.png"
 
-import './form_style.css'
+import './form.css'
 
 const InsuranceForm = ({setGlobal,setAmount,setresponse}) => {
 
@@ -15,6 +15,7 @@ const InsuranceForm = ({setGlobal,setAmount,setresponse}) => {
   const [responsedata, setresponsedata] = useState('');
   const [showPremium, setShowPremium] = useState(false);
   const [fetching, setFetching] = useState(false);
+  const [premiumCalculated, setPremiumCalculated] = useState(false); 
 
   const calculatePremium = () => {
     const formData = {
@@ -28,8 +29,8 @@ const InsuranceForm = ({setGlobal,setAmount,setresponse}) => {
 
     setFetching(true);
     if (!fetching) {
-       fetch('https://liberty-dev.inspektlabs.com/get_lib_data', {
-      //  fetch('http://127.0.0.1:5005/get_lib_data', {
+       fetch('https://liberty.inspektlabs.com/fetch_lib_data', {
+      //fetch('http://127.0.0.1:5001/fetch_lib_data', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -42,6 +43,7 @@ const InsuranceForm = ({setGlobal,setAmount,setresponse}) => {
           setresponsedata(data.total_cost);
           setAmount(data.total_cost);
           setShowPremium(true);
+          setPremiumCalculated(true);
           setFetching(false);
         })
         .catch((error) => {
@@ -52,7 +54,11 @@ const InsuranceForm = ({setGlobal,setAmount,setresponse}) => {
   };
 
   const cart =() => {
-    setGlobal(1)
+    if (premiumCalculated) {
+      setGlobal(1);
+    } else {
+      alert('Please click on calculate premium first.');
+    }
   }
 
   const renderAdultFields = () => {
@@ -83,19 +89,39 @@ const InsuranceForm = ({setGlobal,setAmount,setresponse}) => {
 
   return (
     <>
-      <h1>Insurance Calculator</h1>
-      <div className="containers">
+      <h1>Premium Insurance Calculator</h1>
+      <div className="contain">
         <div className="ff">
           <div className='ss'>
+            <br></br>
+            <br></br>
+      <div className="contain">
+          <img src={insurance} alt="there is no pic" className="gif" />
+          {showPremium && (
+            <h2>
+              <pre className=''>
+                The Premium Plan cost = ₹ {responsedata}.
+                {'\n'} 
+                For number of adults = {numAdults}.
+                {'\n'}
+                For number of children = {numChildren}.
+              </pre>
+            </h2>
+          )}
+        </div>
+        <br></br>
+        <br></br>
+          <p>Now Calculate Your Premium In Just a Click !</p>
+          <br></br>
             <form className="forms">
               <label>
                 Sum Insured:
                 <select value={sumInsured} onChange={(e) => setSumInsured(e.target.value)}>
                   <option value=""> Select an option</option>
                   <option value="500000">500,000</option>
-                  <option value="700000">700,000</option>
-                  <option value="1000000">1000,000</option>
-                  <option value="7500000">7500,000</option>
+                  <option value="400000">400,000</option>
+                  <option value="300000">300,000</option>
+
                 </select>
               </label>
 
@@ -111,16 +137,14 @@ const InsuranceForm = ({setGlobal,setAmount,setresponse}) => {
                 Tenure:
                 <select value={tenure} onChange={(e) => setTenure(e.target.value)}>
                   <option value="1yr">1 Year</option>
-                  <option value="2yr">2 Years</option>
                 </select>
               </label>
 
               <label>
-                Number of Adults:
+                Enter Number of Adults:
                 <input
-                  type="number"
-                  min="1"
-                  max="2"
+                  type="text"
+                  required={true}
                   value={numAdults}
                   onChange={(e) => setNumAdults(Number(e.target.value))}
                 />
@@ -129,17 +153,15 @@ const InsuranceForm = ({setGlobal,setAmount,setresponse}) => {
               {renderAdultFields()}
 
               <label>
-                Number of Children:
+                Enter Number of Children (Base rate is ₹ 7073):
                 <input
                   type="number"
-                  min="0"
-                  max="4"
                   value={numChildren}
                   onChange={(e) => setNumChildren(Number(e.target.value))}
                 />
               </label>
 
-              <p className='para'>We don't spam, Promise!</p>
+              
 
               <button type="button" className='cal1' onClick={calculatePremium}>
                 Calculate Premium
@@ -150,21 +172,9 @@ const InsuranceForm = ({setGlobal,setAmount,setresponse}) => {
             </form>
           </div>
         </div>
-        <div className="gif-container">
-          <img src={insurance} alt="there is no pic" className="gif" />
-          {showPremium && (
-            <h2>
-              <pre className='pp'>
-                The Premium Plan cost is {responsedata}.
-                {'\n'} 
-                For number of adults = {numAdults}.
-                {'\n'}
-                For number of children = {numChildren}.
-              </pre>
-            </h2>
-          )}
-        </div>
+      
       </div>
+    
     </>
   );
 }

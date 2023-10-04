@@ -1,36 +1,27 @@
 /* external-styles.css */
-.container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-  }
+
   
-  .box {
-    width: 400px;
-    padding: 20px;
-    background: #f4f4f4;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    border-radius: 8px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+
   
   .home-button {
+    height: 10%;
+    width:20%;
+    padding: 10px;
     cursor: pointer;
     background: #000000;
     color: white;
     padding: 10px;
-    margin-bottom: 20px;
+    margin: 0 auto; /* Center horizontally */
     display: flex;
     align-items: center;
+    justify-content: center; /* Center vertically and horizontally */
     text-align: center;
-  }
+}
+
   
-  .home-button i {
-    margin-right: 5px;
-  }
+ .marval {
+  margin-top: 20px;
+ }
   
   .title {
     width: 100%;
@@ -38,8 +29,8 @@
   }
   
   .title h3 {
+    margin:10px;
     font-size: 1.5rem;
-    border-bottom: 2px solid #007BFF;
     padding-bottom: 10px;
     text-align: center;
   }
@@ -79,13 +70,15 @@
   
   .payment-method {
     display: inline-block;
-    margin-left: 10px;
+    margin-left: 20px;
   }
   
   .pay-button {
-    background: #ff0000;
+    height: 10%;
+    width:10%;
+    padding: 10px;
+    background: #6be24a;
     color: white;
-    padding: 10px 20px;
     font-size: 1.2rem;
     border: none;
     cursor: pointer;
