@@ -6,7 +6,8 @@ import './checkout.css'
 const Checkout = ({ amount, setGlobal, response }) => {
 
   const back = () => {
-    setGlobal(0);
+    //setGlobal(0);
+    window.location.reload();
   }
   
   return (
