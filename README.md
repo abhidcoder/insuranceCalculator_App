@@ -11,3 +11,5 @@ https://github.com/abhidcoder/InsuranceCalculate_App
 To run this on local server just hit:
 
 npm start
+
+Live on : https://sunny-biscochitos-3508b1.netlify.app/
